@@ -71,7 +71,10 @@ class _MyHomeState extends State<MyHome> {
              new SliverGrid(delegate:new SliverChildBuilderDelegate((con,i){
                
                return Container(
-                 child:(hosp[i]==null)?new CircularProgressIndicator(value: 4,):new Image.network(hosp[i],alignment: Alignment.center,width:dw(25),height:dw(30),fit:BoxFit.fill,),
+                 child:(hosp[i]==null)?new Container(
+                   height: 100,
+                     width: 100,
+                     child:new CircularProgressIndicator(value: null,)):new Image.network(hosp[i],alignment: Alignment.center,width:dw(25),height:dw(30),fit:BoxFit.fill,),
                );
              },childCount: 4), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                crossAxisCount:1,
@@ -91,7 +94,10 @@ class _MyHomeState extends State<MyHome> {
                 slivers: <Widget>[
                   new SliverGrid(delegate:new SliverChildBuilderDelegate((con,i){
                     return Container(
-                      child:(doc[i]==null)?new CircularProgressIndicator(value: 4,):new Image.network(doc[i],alignment: Alignment.center,width:dw(25),height:dw(30),fit:BoxFit.fill,),
+                      child:(doc[i]==null)?new Container(
+                        height: 100,
+                      width: 100,
+                      child:new CircularProgressIndicator(value: null,)):new Image.network(doc[i],alignment: Alignment.center,width:dw(25),height:dw(30),fit:BoxFit.fill,),
                     );
                   },childCount: 4), gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount:1,
