@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ssip_projet/home.dart';
-
+import 'database/Model.dart';
 double height, width;
 bool eye = true;
-
+Model _current;
 void main() => runApp(new MaterialApp(
-      home: MyHome(),
+      home: MyApp(),
     ));
 TextEditingController _user = new TextEditingController(),
     _pass = new TextEditingController();
@@ -17,6 +17,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    MethodChannel channel=new MethodChannel("flutter:MediSwift");
+    channel.setMethodCallHandler((method){
+      if(method.method=="getData"){
+
+      }
+    });
+    _current=Model();
+  }
   @override
   Widget build(BuildContext context) {
     if (width == null &&
@@ -134,7 +146,17 @@ class _MyAppState extends State<MyApp> {
                 ]),
                 new Container(
                   child: new FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                     _current.LogIn(_user.text, _pass.text).then((i){
+                       print("hey $i");
+                        if(!i)
+                          return;
+                       MaterialPageRoute router=new MaterialPageRoute(builder: (context){
+                         return MyHome();
+                       });
+                       Navigator.pushReplacement(context, router);
+                     });
+                    },
                     child: new Text(
                       "Log in",
                       style: new TextStyle(color: Colors.white, fontSize: 25),
@@ -214,7 +236,7 @@ class MyBorder extends InputBorder {
       double gapPercentage = 0.0,
       TextDirection textDirection}) {
     // TODO: implement paint
-    Paint paint = Paint();
+    Paint paint = new Paint();
     paint.color = Colors.lightBlueAccent.shade400;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 3.0;
