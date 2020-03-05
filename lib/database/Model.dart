@@ -12,6 +12,7 @@ class Model {
     _storage=FirebaseStorage.instance;
     _auth=FirebaseAuth.instance;
   }
+  
   Future<bool> registerNewUser(String email,String pass,String mob) async
   {
    AuthResult result= await _auth.createUserWithEmailAndPassword(email:email, password:pass,);
